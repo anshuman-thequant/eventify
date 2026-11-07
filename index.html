@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Eventify – discover, explore and register for upcoming events." />
+  <title>Eventify – Discover & Register for Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#events">Skip to events</a>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo" aria-label="Eventify home"><span class="logo-mark">✦</span> Eventify</a>
+      <nav id="nav-links" class="nav-links" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#featured">Featured</a>
+        <a href="#events">Events</a>
+        <a href="#register">Register</a>
+        <a href="#my-registrations">My Tickets <span class="badge" id="ticket-count">0</span></a>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark / light mode" title="Toggle theme">🌙</button>
+        <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+      </div>
+      <div class="container hero-inner">
+        <p class="eyebrow reveal">Workshops • Concerts • Hackathons • Meetups</p>
+        <h1 class="reveal">Find your next <span class="gradient-text">unforgettable</span> experience</h1>
+        <p class="hero-sub reveal">Browse upcoming events, grab your spot in a few clicks, and never miss out with live countdowns.</p>
+        <div class="hero-cta reveal">
+          <a href="#events" class="btn btn-primary">Explore Events</a>
+          <a href="#register" class="btn btn-ghost">Register Now</a>
+        </div>
+        <ul class="stats reveal" aria-label="Platform statistics">
+          <li><strong data-count="12">0</strong><span>Upcoming events</span></li>
+          <li><strong data-count="5">0</strong><span>Categories</span></li>
+          <li><strong data-count="4800">0</strong><span>Attendees joined</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="section" id="featured">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Featured Events</h2>
+          <p>Hand-picked highlights you shouldn't miss.</p>
+        </div>
+        <div class="grid featured-grid" id="featured-grid"></div>
+      </div>
+    </section>
+
+    <!-- ALL EVENTS -->
+    <section class="section alt" id="events">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Upcoming Events</h2>
+          <p>Search by name, venue or keyword, or filter by category.</p>
+        </div>
+
+        <div class="toolbar reveal">
+          <div class="search-wrap">
+            <span aria-hidden="true">🔍</span>
+            <input type="search" id="search" placeholder="Search events, venues, keywords…" aria-label="Search events" autocomplete="off" />
+          </div>
+          <label class="sort-wrap">
+            <span class="sr-only">Sort events</span>
+            <select id="sort" aria-label="Sort events">
+              <option value="date">Soonest first</option>
+              <option value="name">Name (A–Z)</option>
+              <option value="price">Price (low to high)</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+
+        <div class="grid" id="events-grid"></div>
+        <div class="empty hidden" id="empty">
+          <div class="empty-emoji">🗓️</div>
+          <h3>No events found</h3>
+          <p>Try a different search term or category.</p>
+          <button class="btn btn-ghost" id="reset-filters">Reset filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section class="section" id="register">
+      <div class="container register-layout">
+        <div class="register-info reveal">
+          <h2>Reserve your spot</h2>
+          <p>Fill in your details and pick an event. You'll get an instant confirmation with your booking ID.</p>
+          <div class="selected-preview" id="selected-preview" aria-live="polite"></div>
+          <ul class="perks">
+            <li>✅ Free cancellation up to 48 hours before</li>
+            <li>🎟️ Instant digital confirmation</li>
+            <li>🔒 Your details stay on your device</li>
+          </ul>
+        </div>
+
+        <div class="form-card reveal">
+          <form id="reg-form" novalidate>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" placeholder="e.g. Anshuman Tewari" autocomplete="name" />
+              <small class="error" id="name-error" role="alert"></small>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+              <small class="error" id="email-error" role="alert"></small>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" autocomplete="tel" inputmode="numeric" />
+              <small class="error" id="phone-error" role="alert"></small>
+            </div>
+            <div class="field">
+              <label for="event">Select event</label>
+              <select id="event" name="event"></select>
+              <small class="error" id="event-error" role="alert"></small>
+            </div>
+            <div class="field">
+              <label for="tickets">Number of tickets</label>
+              <select id="tickets" name="tickets">
+                <option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Confirm Registration</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY REGISTRATIONS -->
+    <section class="section alt" id="my-registrations">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>My Tickets</h2>
+          <p>Registrations saved in this browser using Local Storage.</p>
+        </div>
+        <div class="tickets" id="tickets-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#home" class="logo"><span class="logo-mark">✦</span> Eventify</a>
+      <p>Built with HTML5, CSS3 &amp; vanilla JavaScript.</p>
+      <p class="muted">© <span id="year"></span> Eventify. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- EVENT DETAILS MODAL -->
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" tabindex="-1">
+      <button class="modal-close icon-btn" data-close aria-label="Close details">✕</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal hidden" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel small" tabindex="-1">
+      <div class="confirm-body" id="confirm-body"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
