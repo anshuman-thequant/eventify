@@ -2,7 +2,7 @@
 
 A modern, fully responsive event management website built with **HTML5, CSS3 and vanilla JavaScript** (no frameworks, no build step). Users can explore upcoming events, search and filter them, read detailed information, and register through a validated form. Registrations are stored in the browser using Local Storage.
 
-**Live demo:** https://anshuman-thequant.github.io/eventify/
+**Live demo:** https://eventify-omega-gray.vercel.app/
 **Repository:** https://github.com/anshuman-thequant/eventify
 
 ---
